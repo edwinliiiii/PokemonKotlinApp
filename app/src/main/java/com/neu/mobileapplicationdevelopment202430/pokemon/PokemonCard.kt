@@ -17,20 +17,21 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun PokemonCard(pokemon: PokemonItem) {
 
     Card (
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
+            .fillMaxWidth(),
         shape = RoundedCornerShape(32.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column (
-            modifier = Modifier.background(Color.White)
+            modifier = Modifier.background(Color(0xFFFAFDF3))
         ) {
             Card(
                 modifier = Modifier
@@ -39,7 +40,7 @@ fun PokemonCard(pokemon: PokemonItem) {
                 shape = RoundedCornerShape(16.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
             ) {
-                AsyncImage(
+                GlideImage(
                     model = pokemon.sprite,
                     contentDescription = pokemon.name,
                     contentScale = ContentScale.Crop,
@@ -52,7 +53,7 @@ fun PokemonCard(pokemon: PokemonItem) {
 
             Text(
                 text = pokemon.name,
-                fontSize = 16.sp,
+                fontSize = 14.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.Black,
                 modifier = Modifier
@@ -62,7 +63,7 @@ fun PokemonCard(pokemon: PokemonItem) {
 
             Text(
                 text = pokemon.species,
-                fontSize = 16.sp,
+                fontSize = 14.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.Black,
                 modifier = Modifier

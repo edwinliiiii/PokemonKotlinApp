@@ -33,6 +33,7 @@ class PokemonPaging(val pokemonService: PokemonApiService, val pokemonDao: Pokem
                             )
                     }
                     val pokemonEntities = pokemons.map { it.toPokemonEntity() }
+                    Log.v("ProductPaging", "API response: ${pokemonEntities}")
                     pokemonDao.deleteByPage(page)
                     pokemonDao.insertAll(pokemonEntities)
                     return LoadResult.Page(
@@ -49,6 +50,7 @@ class PokemonPaging(val pokemonService: PokemonApiService, val pokemonDao: Pokem
                 return loadFromDatabase(page)
             }
         } catch (exception: Exception) {
+            Log.v("ProductPaging", "API response: ${exception}")
             return LoadResult.Error(exception)
         }
     }

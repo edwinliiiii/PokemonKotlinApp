@@ -4,10 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [PokemonEntity::class], version = 2)
+@Database(entities = [PokemonEntity::class], version = 3)
 abstract class PokemonDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
 
@@ -15,13 +16,9 @@ abstract class PokemonDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: PokemonDatabase? = null
 
-        private val MIGRATION_1_2 = object : Migration(1, 2) {
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
             override fun migrate(db: SupportSQLiteDatabase) {
-                try {
-                    db.execSQL("SELECT page FROM pokemon LIMIT 1")
-                } catch (e: Exception) {
-                    db.execSQL("ALTER TABLE pokemon ADD COLUMN page INTEGER NOT NULL DEFAULT 1")
-                }
+                db.execSQL("ALTER TABLE pokemon ADD COLUMN abilities TEXT NOT NULL DEFAULT ''")
             }
         }
         fun getDatabase(
@@ -36,7 +33,7 @@ abstract class PokemonDatabase : RoomDatabase() {
                         context.applicationContext,
                         PokemonDatabase::class.java,
                         "pokemon_database")
-                        .addMigrations(MIGRATION_1_2)
+                        .addMigrations(MIGRATION_2_3)
                     val builtDatabase = instance.build()
                     INSTANCE = builtDatabase
                     return INSTANCE as PokemonDatabase
