@@ -7,5 +7,5 @@
     <string name="username">Username</string>
     <string name="pokedex">Pokedex</string>
     <string name="team">My Team</string>
-    <string name="coverate">Team Coverage</string>
+    <string name="coverage">Team Coverage</string>
 </resources>

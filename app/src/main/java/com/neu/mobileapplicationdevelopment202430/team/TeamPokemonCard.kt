@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.neu.mobileapplicationdevelopment202430.room.TeamPokemonEntity
+import com.neu.mobileapplicationdevelopment202430.utils.getTypeColor
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -57,16 +58,16 @@ fun TeamPokemonCard(
                     .size(72.dp)
             )
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(14.dp))
 
             Text(
                 text = pokemon.name,
-                fontSize = 16.sp,
+                fontSize = 18.sp,
                 color = Color.Black,
                 modifier = Modifier.weight(1f)
             )
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(20.dp))
 
             Column(
                 verticalArrangement = Arrangement.spacedBy(2.dp),
@@ -75,22 +76,20 @@ fun TeamPokemonCard(
             ) {
                 Text(
                     text = pokemon.type1,
-                    fontSize = 14.sp,
-                    color = Color.DarkGray
+                    fontSize = 16.sp,
+                    color = getTypeColor(pokemon.type1)
                 )
                 Text(
                     text = pokemon.type2?.takeIf { it.isNotBlank() } ?: "—",
-                    fontSize = 14.sp,
-                    color = Color.DarkGray
+                    fontSize = 16.sp,
+                    color = pokemon.type2?.takeIf { it.isNotBlank() }?.let { getTypeColor(it) } ?: Color.DarkGray
                 )
             }
-
-            Spacer(modifier = Modifier.width(12.dp))
 
             IconButton(onClick = onRemove) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = "Remove from team"
+                    contentDescription = "Remove from team",
                 )
             }
         }
@@ -121,27 +120,25 @@ fun TeamPlaceholderCard(modifier: Modifier = Modifier) {
                     .background(Color.LightGray)
             )
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(14.dp))
 
             Text(
                 text = "Empty Slot",
-                fontSize = 16.sp,
+                fontSize = 18.sp,
                 color = Color.Gray,
                 modifier = Modifier.weight(1f)
             )
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(20.dp))
 
             Column(
                 verticalArrangement = Arrangement.spacedBy(2.dp),
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.weight(1f)
             ) {
-                Text(text = "—", fontSize = 14.sp, color = Color.Gray)
-                Text(text = "—", fontSize = 14.sp, color = Color.Gray)
+                Text(text = "—", fontSize = 16.sp, color = Color.Gray)
+                Text(text = "—", fontSize = 16.sp, color = Color.Gray)
             }
-
-            Spacer(modifier = Modifier.width(12.dp))
 
             IconButton(onClick = {}, enabled = false) {
                 Icon(

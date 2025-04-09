@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -32,6 +33,7 @@ fun TeamScreen(navController: NavController) {
     val viewModel: TeamViewModel = viewModel(factory = factory)
     val team by viewModel.team.collectAsState(initial = emptyList())
 
+    // TODO: Remove
     LaunchedEffect(Unit) {
         val dummyTeam = listOf(
             TeamPokemonEntity(
@@ -71,9 +73,11 @@ fun TeamScreen(navController: NavController) {
                 text = stringResource(id = R.string.team),
                 fontSize = 24.sp,
                 color = Color.White,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(16.dp),
+                textAlign = TextAlign.Center
             )
         }
+
         LazyColumn {
             items(team) { pokemon ->
                 TeamPokemonCard(
@@ -92,6 +96,7 @@ fun TeamScreen(navController: NavController) {
         Button(
             onClick = { navController.navigate("coverage") },
             modifier = Modifier.fillMaxWidth()
+                .padding(vertical = 6.dp, horizontal = 12.dp)
         ) {
             Text("Check Coverage")
         }
