@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = "team"
+                        startDestination = "home"
                     ) {
                         composable("home") {
                             HomeScreen(navController = navController)
