@@ -8,9 +8,10 @@ import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [PokemonEntity::class], version = 3)
+@Database(entities = [PokemonEntity::class, TeamPokemonEntity::class], version = 4)
 abstract class PokemonDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
+    abstract fun teamPokemonDao(): TeamPokemonDao
 
     companion object {
         @Volatile
@@ -33,7 +34,7 @@ abstract class PokemonDatabase : RoomDatabase() {
                         context.applicationContext,
                         PokemonDatabase::class.java,
                         "pokemon_database")
-                        .addMigrations(MIGRATION_2_3)
+                        .fallbackToDestructiveMigration()
                     val builtDatabase = instance.build()
                     INSTANCE = builtDatabase
                     return INSTANCE as PokemonDatabase
