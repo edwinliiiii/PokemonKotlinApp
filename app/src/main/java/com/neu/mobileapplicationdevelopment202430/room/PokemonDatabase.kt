@@ -4,9 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(entities = [PokemonEntity::class, TeamPokemonEntity::class], version = 4)
 abstract class PokemonDatabase : RoomDatabase() {
@@ -17,11 +14,6 @@ abstract class PokemonDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: PokemonDatabase? = null
 
-        private val MIGRATION_2_3 = object : Migration(2, 3) {
-            override fun migrate(db: SupportSQLiteDatabase) {
-                db.execSQL("ALTER TABLE pokemon ADD COLUMN abilities TEXT NOT NULL DEFAULT ''")
-            }
-        }
         fun getDatabase(
             context: Context
         ): PokemonDatabase {
