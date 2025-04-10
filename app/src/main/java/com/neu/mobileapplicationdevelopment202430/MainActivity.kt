@@ -1,6 +1,5 @@
 package com.neu.mobileapplicationdevelopment202430
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,20 +7,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavType
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.WorkRequest
-import com.google.gson.Gson
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.neu.mobileapplicationdevelopment202430.fragment.HomeScreen
 import com.neu.mobileapplicationdevelopment202430.fragment.PokemonInfoScreen
+import com.neu.mobileapplicationdevelopment202430.fragment.TeamScreen
+import com.neu.mobileapplicationdevelopment202430.fragment.TeamCoverageScreen
 import com.neu.mobileapplicationdevelopment202430.pokemon.PokemonItem
-import java.util.concurrent.TimeUnit
+import com.neu.mobileapplicationdevelopment202430.pokemon.TeamViewModel
+import com.neu.mobileapplicationdevelopment202430.pokemon.TeamViewModelFactory
+import com.neu.mobileapplicationdevelopment202430.room.PokemonDatabase
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState : Bundle?) {
@@ -40,6 +38,7 @@ class MainActivity : ComponentActivity() {
                         composable("home") {
                             HomeScreen(navController = navController)
                         }
+
                         composable("pokemonInfo") {
                             val pokemon =
                                 navController.previousBackStackEntry?.savedStateHandle?.get<PokemonItem>(
@@ -49,8 +48,15 @@ class MainActivity : ComponentActivity() {
                                 PokemonInfoScreen(pokemon = it, navController = navController)
                             }
                         }
-                    }
 
+                        composable("team") {
+                            TeamScreen(navController = navController)
+                        }
+
+                        composable("coverage") {
+                            TeamCoverageScreen()
+                        }
+                    }
                 }
             }
         }
