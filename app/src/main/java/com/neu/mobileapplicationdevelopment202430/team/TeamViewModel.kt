@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.neu.mobileapplicationdevelopment202430.room.TeamPokemonDao
 import com.neu.mobileapplicationdevelopment202430.room.TeamPokemonEntity
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class TeamViewModelFactory(private val dao: TeamPokemonDao) : ViewModelProvider.Factory {
@@ -27,18 +26,4 @@ class TeamViewModel(private val dao: TeamPokemonDao): ViewModel() {
             dao.removeFromTeam(id)
         }
     }
-
-    suspend fun teamHasRoom(): Boolean {
-        return dao.getTeamSize() < 6
-    }
-
-    suspend fun isInTeam(pokemonId: Int): Boolean {
-        return dao.getTeam().first().any { it.id == pokemonId }
-    }
-
-    suspend fun addPokemonToTeam(pokemon: TeamPokemonEntity) {
-        dao.addToTeam(pokemon)
-    }
 }
-
-
