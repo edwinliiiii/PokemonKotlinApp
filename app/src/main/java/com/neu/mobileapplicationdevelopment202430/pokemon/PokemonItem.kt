@@ -1,6 +1,7 @@
 package com.neu.mobileapplicationdevelopment202430.pokemon
 
 import android.os.Parcelable
+import com.neu.mobileapplicationdevelopment202430.room.TeamPokemonEntity
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -19,4 +20,8 @@ data class PokemonItem(
 data class PokemonResponse (
     val page: Int,
     val pokemon: List<PokemonItem>
+)
+
+data class PokemonRandomResponse(
+    val pokemon: TeamPokemonEntity
 )
