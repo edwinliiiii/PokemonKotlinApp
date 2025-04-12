@@ -3,6 +3,7 @@ package com.neu.mobileapplicationdevelopment202430.room
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.neu.mobileapplicationdevelopment202430.pokemon.PokemonItem
 
 @Entity(tableName = "team")
 data class TeamPokemonEntity(
@@ -15,3 +16,4 @@ data class TeamPokemonEntity(
     @ColumnInfo(name = "description")  val description: String,
     @ColumnInfo(name = "sprite") val sprite: String
 )
+

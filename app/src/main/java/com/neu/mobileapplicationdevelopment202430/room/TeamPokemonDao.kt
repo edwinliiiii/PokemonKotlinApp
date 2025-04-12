@@ -11,7 +11,7 @@ interface TeamPokemonDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addToTeam(pokemon: TeamPokemonEntity)
 
-    @Query("SELECT * FROM team ORDER BY name")
+    @Query("SELECT * FROM team")
     fun getTeam(): Flow<List<TeamPokemonEntity>>
 
     @Query("DELETE FROM team WHERE id = :pokemonId")

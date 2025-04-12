@@ -1,10 +1,7 @@
 package com.neu.mobileapplicationdevelopment202430.product
 
 import com.neu.mobileapplicationdevelopment202430.pokemon.PokemonItem
-import com.neu.mobileapplicationdevelopment202430.pokemon.PokemonRandomResponse
 import com.neu.mobileapplicationdevelopment202430.pokemon.PokemonResponse
-import com.neu.mobileapplicationdevelopment202430.room.PokemonEntity
-import com.neu.mobileapplicationdevelopment202430.room.TeamPokemonEntity
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -14,14 +11,13 @@ import retrofit2.http.Query
 
 interface PokemonApiService {
     @GET("/getRandomPokemon")
-    suspend fun getRandomPokemon(): Response<PokemonRandomResponse>
+    suspend fun getRandomPokemon(): Response<PokemonItem>
 
     @GET("/getPokemon")
     suspend fun getPokemonByPage(@Query("page") page: Int): Response<PokemonResponse>
 }
 
 sealed class PokemonResult<out T> {
-    data object Idle : PokemonResult<Nothing>()
     data object Loading : PokemonResult<Nothing>()
     data class Success<T>(val pokemon: T) : PokemonResult<T>()
     data class Error(val message: String) : PokemonResult<Nothing>()

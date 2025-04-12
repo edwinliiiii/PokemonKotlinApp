@@ -41,6 +41,19 @@ fun TeamCoverageScreen() {
         .toSet()
 
     Column(modifier = Modifier.fillMaxSize()) {
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            color = Color(0xFF2B5876)
+        ) {
+            Text(
+                text = stringResource(id = R.string.coverage),
+                fontSize = 24.sp,
+                color = Color.White,
+                modifier = Modifier.padding(16.dp),
+                textAlign = TextAlign.Center
+            )
+        }
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
