@@ -20,7 +20,6 @@ import com.neu.mobileapplicationdevelopment202430.R
 import com.neu.mobileapplicationdevelopment202430.pokemon.TeamViewModel
 import com.neu.mobileapplicationdevelopment202430.pokemon.TeamViewModelFactory
 import com.neu.mobileapplicationdevelopment202430.room.PokemonDatabase
-import com.neu.mobileapplicationdevelopment202430.room.TeamPokemonEntity
 import com.neu.mobileapplicationdevelopment202430.team.TeamPlaceholderCard
 import com.neu.mobileapplicationdevelopment202430.team.TeamPokemonCard
 
@@ -32,37 +31,6 @@ fun TeamScreen(navController: NavController) {
     val factory = TeamViewModelFactory(dao)
     val viewModel: TeamViewModel = viewModel(factory = factory)
     val team by viewModel.team.collectAsState(initial = emptyList())
-
-    // TODO: Remove
-    LaunchedEffect(Unit) {
-        val dummyTeam = listOf(
-            TeamPokemonEntity(
-                id = 1,
-                name = "Bulbasaur",
-                type1 = "Grass",
-                type2 = "Poison",
-                abilities = "Overgrow",
-                species = "Seed Pokémon",
-                description = "A strange seed was planted on its back at birth.",
-                sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-            ),
-            TeamPokemonEntity(
-                id = 4,
-                name = "Charmander",
-                type1 = "Fire",
-                type2 = null,
-                abilities = "Blaze",
-                species = "Lizard Pokémon",
-                description = "Obviously prefers hot places.",
-                sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
-            )
-        )
-
-        dummyTeam.forEach {
-            viewModel.addPokemonToTeam(it)
-        }
-    }
-
 
     Column(modifier = Modifier.fillMaxSize()) {
         Surface(
