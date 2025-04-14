@@ -56,7 +56,7 @@ fun HomeScreen(navController: NavController) {
             color = Color(0xFF2B5876)
         ) {
             Text(
-                text = stringResource(id = R.string.Pokedex),
+                text = stringResource(id = R.string.pokedex),
                 fontSize = 24.sp,
                 color = Color.White,
                 modifier = Modifier

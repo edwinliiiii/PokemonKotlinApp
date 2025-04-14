@@ -1,6 +1,5 @@
 package com.neu.mobileapplicationdevelopment202430.room
 
-import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -42,13 +41,10 @@ class PokemonRepository(val pokemonDao: PokemonDao, val pokemonApiService: Pokem
                 PokemonResult.Error("Random Gen Failed: ${response.code()}, ${response.message()}")
             }
         } catch (e: IOException) {
-            Log.d("PokemonRepository", "IO error, failed to fetch random pokemon")
             PokemonResult.Error("Network error: please check your connection.")
         } catch (e: HttpException) {
-            Log.d("PokemonRepository", "HTTP error, failed to fetch random pokemon")
             PokemonResult.Error("Random Gen Failed: ${e.code()}, ${e.message()}")
         } catch (e: Exception) {
-            Log.d("PokemonRepository", "Unknown error, failed to fetch random pokemon")
             PokemonResult.Error("Unexpected error occurred.")
         }
     }

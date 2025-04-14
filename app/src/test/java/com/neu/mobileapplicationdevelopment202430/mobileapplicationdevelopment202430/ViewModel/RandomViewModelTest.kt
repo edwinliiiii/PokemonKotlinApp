@@ -1,10 +1,11 @@
 package com.neu.mobileapplicationdevelopment202430.ViewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.neu.mobileapplicationdevelopment202430.Util.FakePokemonRepository
-import com.neu.mobileapplicationdevelopment202430.Util.FakeTeamPokemonDao
+import com.neu.mobileapplicationdevelopment202430.Fake.FakePokemonRepository
+import com.neu.mobileapplicationdevelopment202430.Fake.FakeTeamPokemonDao
 import com.neu.mobileapplicationdevelopment202430.product.PokemonResult
 import com.neu.mobileapplicationdevelopment202430.random.RandomViewModel
+import com.neu.mobileapplicationdevelopment202430.random.RandomViewModelFactory
 import com.neu.mobileapplicationdevelopment202430.room.TeamPokemonEntity
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
@@ -17,6 +18,8 @@ import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
+import org.hamcrest.CoreMatchers.instanceOf
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -51,6 +54,7 @@ class RandomViewModelTest {
     private lateinit var fakeRepository: FakePokemonRepository
     private lateinit var fakeTeamDao: FakeTeamPokemonDao
     private lateinit var viewModel: RandomViewModel
+    private lateinit var factory: RandomViewModelFactory
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before
@@ -59,6 +63,7 @@ class RandomViewModelTest {
         fakeRepository = FakePokemonRepository()
         fakeTeamDao = FakeTeamPokemonDao()
         viewModel = RandomViewModel(fakeRepository, fakeTeamDao)
+        factory = RandomViewModelFactory(fakeRepository, fakeTeamDao)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -181,5 +186,16 @@ class RandomViewModelTest {
 
         // then
         assertNull("Toast message should be null after clearing", viewModel.toastMessage.value)
+    }
+
+    @Test
+    fun createWhenRequestedViewModelIsRandomViewModelReturnsRandomViewModelInstance() {
+        // when
+        val viewModel = factory.create(RandomViewModel::class.java)
+
+        // then
+        assertNotNull("ViewModel should not be null", viewModel)
+        assertTrue("ViewModel should be an instance of RandomViewModel", viewModel is RandomViewModel)
+        assertThat(viewModel, instanceOf(RandomViewModel::class.java))
     }
 }
