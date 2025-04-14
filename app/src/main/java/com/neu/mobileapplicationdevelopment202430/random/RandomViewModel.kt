@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.neu.mobileapplicationdevelopment202430.product.PokemonResult
-import com.neu.mobileapplicationdevelopment202430.room.PokemonRepository
+import com.neu.mobileapplicationdevelopment202430.room.IPokemonRepository
 import com.neu.mobileapplicationdevelopment202430.room.TeamPokemonDao
 import com.neu.mobileapplicationdevelopment202430.room.TeamPokemonEntity
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class RandomViewModelFactory(
-    private val repository: PokemonRepository,
+    private val repository: IPokemonRepository,
     private val teamDao: TeamPokemonDao
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -28,7 +28,7 @@ class RandomViewModelFactory(
 }
 
 class RandomViewModel(
-    private val repository: PokemonRepository,
+    private val repository: IPokemonRepository,
     private val teamDao: TeamPokemonDao
 ) : ViewModel() {
     private val _randomPokemonState = MutableStateFlow<PokemonResult<TeamPokemonEntity>>(PokemonResult.Idle)

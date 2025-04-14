@@ -11,8 +11,14 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 import java.io.IOException
 
-class PokemonRepository(val pokemonDao: PokemonDao, val pokemonApiService: PokemonApiService) {
-    fun getPagedPokemon(): Flow<PagingData<PokemonItem>> {
+interface IPokemonRepository {
+    fun getPagedPokemon(): Flow<PagingData<PokemonItem>>
+    suspend fun getRandomPokemon(): PokemonResult<TeamPokemonEntity>
+}
+
+class PokemonRepository(val pokemonDao: PokemonDao, val pokemonApiService: PokemonApiService)
+    : IPokemonRepository {
+    override fun getPagedPokemon(): Flow<PagingData<PokemonItem>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 25,
@@ -25,7 +31,7 @@ class PokemonRepository(val pokemonDao: PokemonDao, val pokemonApiService: Pokem
         ).flow
     }
 
-    suspend fun getRandomPokemon(): PokemonResult<TeamPokemonEntity> {
+    override suspend fun getRandomPokemon(): PokemonResult<TeamPokemonEntity> {
         return try {
             val response = pokemonApiService.getRandomPokemon()
             val body = response.body()
