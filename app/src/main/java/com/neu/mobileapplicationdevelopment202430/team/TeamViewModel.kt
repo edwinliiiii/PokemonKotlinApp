@@ -18,7 +18,7 @@ class TeamViewModelFactory(private val dao: TeamPokemonDao) : ViewModelProvider.
     }
 }
 
-class TeamViewModel(private val dao: TeamPokemonDao): ViewModel() {
+open class TeamViewModel(private val dao: TeamPokemonDao): ViewModel() {
     val team: Flow<List<TeamPokemonEntity>> = dao.getTeam()
 
     fun removePokemon(id: Int) {

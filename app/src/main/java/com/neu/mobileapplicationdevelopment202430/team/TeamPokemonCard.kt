@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -35,7 +36,8 @@ fun TeamPokemonCard(
         modifier = modifier
             .fillMaxWidth()
             .height(100.dp)
-            .padding(vertical = 8.dp, horizontal = 12.dp),
+            .padding(vertical = 8.dp, horizontal = 12.dp)
+            .testTag("teamPokemonCard_${pokemon.id}"),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(containerColor = Color(0xFFFAFDF3))
@@ -52,6 +54,7 @@ fun TeamPokemonCard(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(72.dp)
+                    .testTag("pokemonImage_${pokemon.id}")
             )
 
             Spacer(modifier = Modifier.width(14.dp))
@@ -61,6 +64,7 @@ fun TeamPokemonCard(
                 fontSize = 18.sp,
                 color = Color.Black,
                 modifier = Modifier.weight(1f)
+                    .testTag("pokemonName_${pokemon.id}")
             )
 
             Spacer(modifier = Modifier.width(20.dp))
@@ -73,12 +77,14 @@ fun TeamPokemonCard(
                 Text(
                     text = pokemon.type1,
                     fontSize = 16.sp,
-                    color = getTypeColor(pokemon.type1)
+                    color = getTypeColor(pokemon.type1),
+                    modifier = Modifier.testTag("pokemonType1_${pokemon.id}")
                 )
                 Text(
                     text = pokemon.type2?.takeIf { it.isNotBlank() } ?: "—",
                     fontSize = 16.sp,
-                    color = pokemon.type2?.takeIf { it.isNotBlank() }?.let { getTypeColor(it) } ?: Color.DarkGray
+                    color = pokemon.type2?.takeIf { it.isNotBlank() }?.let { getTypeColor(it) } ?: Color.DarkGray,
+                    modifier = Modifier.testTag("pokemonType2_${pokemon.id}")
                 )
             }
 
@@ -86,6 +92,7 @@ fun TeamPokemonCard(
                 Icon(
                     imageVector = Icons.Default.Close,
                     contentDescription = "Remove from team",
+                    modifier = Modifier.testTag("removeButton")
                 )
             }
         }
@@ -98,7 +105,8 @@ fun TeamPlaceholderCard(modifier: Modifier = Modifier) {
         modifier = modifier
             .fillMaxWidth()
             .height(100.dp)
-            .padding(vertical = 8.dp, horizontal = 12.dp),
+            .padding(vertical = 8.dp, horizontal = 12.dp)
+            .testTag("placeholderCard"),
         shape = RoundedCornerShape(16.dp),
         border = BorderStroke(2.dp, Color.LightGray),
         colors = CardDefaults.cardColors(containerColor = Color(0xFFF8F8F8))

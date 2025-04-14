@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -34,29 +35,39 @@ fun TeamScreen(navController: NavController) {
 
     Column(modifier = Modifier.fillMaxSize()) {
         Surface(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag("teamHeader"),
             color = Color(0xFF2B5876)
         ) {
             Text(
                 text = stringResource(id = R.string.team),
                 fontSize = 24.sp,
                 color = Color.White,
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .testTag("teamScreenTitle"),
                 textAlign = TextAlign.Center
             )
         }
 
-        LazyColumn {
+        LazyColumn (
+            modifier = Modifier
+                .weight(1f)
+                .testTag("teamList")) {
             items(team) { pokemon ->
                 TeamPokemonCard(
                     pokemon = pokemon,
-                    onRemove = { viewModel.removePokemon(pokemon.id) }
+                    onRemove = { viewModel.removePokemon(pokemon.id) },
+                    modifier = Modifier.testTag("teamPokemonCard_${pokemon.id}")
                 )
             }
 
             val missingCount = 6 - team.size
             items(missingCount) {
-                TeamPlaceholderCard()
+                TeamPlaceholderCard(
+                    modifier = Modifier.testTag("placeholderCard")
+                )
             }
         }
 
@@ -65,6 +76,7 @@ fun TeamScreen(navController: NavController) {
             onClick = { navController.navigate("coverage") },
             modifier = Modifier.fillMaxWidth()
                 .padding(vertical = 6.dp, horizontal = 12.dp)
+                .testTag("checkCoverageButton")
         ) {
             Text("Check Coverage")
         }
