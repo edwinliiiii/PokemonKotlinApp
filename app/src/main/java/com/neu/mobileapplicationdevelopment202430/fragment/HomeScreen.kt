@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -45,16 +46,22 @@ fun HomeScreen(navController: NavController) {
     val pagedPokemon = viewModel.pagedPokemon.collectAsLazyPagingItems()
 
     Column (
-        modifier = Modifier.fillMaxSize()) {
+        modifier = Modifier
+            .fillMaxSize()
+            .testTag("pokemon_home_column")) {
         Surface(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag("pokemon_home_surface"),
             color = Color(0xFF2B5876)
         ) {
             Text(
-                text = stringResource(id = R.string.pokedex),
+                text = stringResource(id = R.string.Pokedex),
                 fontSize = 24.sp,
                 color = Color.White,
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .testTag("pokemon_home_pokedex"),
                 textAlign = TextAlign.Center
             )
         }
@@ -64,6 +71,7 @@ fun HomeScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp)
+                .testTag("pokemon_home_grid")
         ) {
             items(count = pagedPokemon.itemCount) { index ->
                 pagedPokemon[index]?.let { pokemon ->
@@ -71,7 +79,8 @@ fun HomeScreen(navController: NavController) {
                         modifier = Modifier
                             .padding(4.dp)
                             .background(Color.White)
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .testTag("pokemon_home_pokemon_${pokemon.id}"),
                         shape = RoundedCornerShape(32.dp),
                         onClick = {
                             navController.currentBackStackEntry?.savedStateHandle?.set("pokemon", pokemon)
@@ -91,7 +100,8 @@ fun HomeScreen(navController: NavController) {
                             modifier = Modifier
                                 .fillMaxSize()
                                 .background(Color.White)
-                                .padding(16.dp),
+                                .padding(16.dp)
+                                .testTag("pokemon_home_box"),
                             contentAlignment = Alignment.Center
                         ) {
                             CircularProgressIndicator()
