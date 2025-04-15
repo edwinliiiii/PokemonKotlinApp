@@ -6,12 +6,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.neu.mobileapplicationdevelopment202430.product.PokemonResult
+import com.neu.mobileapplicationdevelopment202430.room.IPokemonRepository
 import com.neu.mobileapplicationdevelopment202430.room.PokemonRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class PokemonViewModelFactory(private val repository: PokemonRepository) : ViewModelProvider.Factory {
+class PokemonViewModelFactory(private val repository: IPokemonRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PokemonListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
@@ -22,7 +23,7 @@ class PokemonViewModelFactory(private val repository: PokemonRepository) : ViewM
 }
 
 
-class PokemonListViewModel (val repository: PokemonRepository): ViewModel() {
+class PokemonListViewModel (val repository: IPokemonRepository): ViewModel() {
     val pokemon = MutableStateFlow<PokemonResult<List<PokemonItem>>>(PokemonResult.Loading)
     val pagedPokemon: Flow<PagingData<PokemonItem>> = repository.getPagedPokemon().cachedIn(viewModelScope)
 }

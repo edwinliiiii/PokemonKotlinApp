@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -44,11 +45,14 @@ fun TeamCoverageScreen() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 18.dp),
+                .padding(top = 18.dp)
+                .testTag("coverageHeaders"),
         ) {
             Text(
                 text = "My Team Types",
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .testTag("myTeamTypesTitle"),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
@@ -56,7 +60,9 @@ fun TeamCoverageScreen() {
             )
             Text(
                 text = "All Types",
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .testTag("allTypesTitle"),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
@@ -67,7 +73,8 @@ fun TeamCoverageScreen() {
         LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .testTag("coverageList"),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
             items(allTypes.size) { index ->
@@ -76,7 +83,9 @@ fun TeamCoverageScreen() {
                 val hasType = typeKey in ownedTypes
 
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("coverageRow"),
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Box(
@@ -86,7 +95,8 @@ fun TeamCoverageScreen() {
                             .background(
                                 color = if (hasType) getTypeColor(typeKey) else Color.LightGray,
                                 shape = RoundedCornerShape(6.dp)
-                            ),
+                            )
+                            .testTag("teamBox_$typeKey"),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
@@ -103,7 +113,8 @@ fun TeamCoverageScreen() {
                             .background(
                                 color = getTypeColor(typeKey),
                                 shape = RoundedCornerShape(6.dp)
-                            ),
+                            )
+                            .testTag("referenceBox_$typeKey"),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
