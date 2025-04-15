@@ -1,4 +1,4 @@
-package com.neu.mobileapplicationdevelopment202430.ui.team
+package com.neu.mobileapplicationdevelopment202430.UI.team
 
 import android.annotation.SuppressLint
 import androidx.compose.ui.test.*
@@ -18,7 +18,7 @@ import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import com.neu.mobileapplicationdevelopment202430.pokemon.TeamViewModel
-import com.neu.mobileapplicationdevelopment202430.ui.fakes.FakeTeamViewModel
+import com.neu.mobileapplicationdevelopment202430.UI.fakes.FakeTeamViewModel
 
 @RunWith(AndroidJUnit4::class)
 class TeamScreenTest {

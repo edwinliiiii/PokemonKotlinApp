@@ -1,4 +1,4 @@
-package com.neu.mobileapplicationdevelopment202430.ui.team
+package com.neu.mobileapplicationdevelopment202430.UI.team
 
 import android.annotation.SuppressLint
 import androidx.compose.runtime.CompositionLocalProvider
@@ -13,7 +13,7 @@ import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.neu.mobileapplicationdevelopment202430.fragment.TeamCoverageScreen
 import com.neu.mobileapplicationdevelopment202430.pokemon.TeamViewModel
-import com.neu.mobileapplicationdevelopment202430.ui.fakes.FakeTeamViewModel
+import com.neu.mobileapplicationdevelopment202430.UI.fakes.FakeTeamViewModel
 import com.neu.mobileapplicationdevelopment202430.utils.typeColors
 import org.junit.Rule
 import org.junit.Test

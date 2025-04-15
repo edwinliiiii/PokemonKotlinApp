@@ -1,4 +1,4 @@
-package com.neu.mobileapplicationdevelopment202430.ui.fakes
+package com.neu.mobileapplicationdevelopment202430.UI.fakes
 
 import com.neu.mobileapplicationdevelopment202430.room.TeamPokemonDao
 import com.neu.mobileapplicationdevelopment202430.room.TeamPokemonEntity

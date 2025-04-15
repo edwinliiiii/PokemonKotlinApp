@@ -1,4 +1,4 @@
-package com.neu.mobileapplicationdevelopment202430.ui.team
+package com.neu.mobileapplicationdevelopment202430.UI.team
 
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
